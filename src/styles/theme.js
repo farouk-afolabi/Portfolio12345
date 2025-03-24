@@ -1,0 +1,46 @@
+export const theme = {
+  colors: {
+    primary: '#2563eb',
+    secondary: '#3b82f6',
+    background: '#ffffff',
+    backgroundDark: '#0f172a',
+    text: '#1e293b',
+    textLight: '#64748b',
+    textDark: '#f8fafc',
+    accent: '#f59e0b',
+    error: '#ef4444',
+    success: '#22c55e',
+  },
+  fonts: {
+    heading: "'Inter', sans-serif",
+    body: "'Inter', sans-serif",
+  },
+  fontSizes: {
+    xs: '0.75rem',
+    sm: '0.875rem',
+    base: '1rem',
+    lg: '1.125rem',
+    xl: '1.25rem',
+    '2xl': '1.5rem',
+    '3xl': '1.875rem',
+    '4xl': '2.25rem',
+  },
+  spacing: {
+    xs: '0.5rem',
+    sm: '1rem',
+    md: '1.5rem',
+    lg: '2rem',
+    xl: '3rem',
+    '2xl': '4rem',
+  },
+  breakpoints: {
+    sm: '640px',
+    md: '768px',
+    lg: '1024px',
+    xl: '1280px',
+    '2xl': '1536px',
+  },
+  transitions: {
+    default: 'all 0.3s ease-in-out',
+  },
+}; 
