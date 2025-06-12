@@ -117,12 +117,12 @@ const Projects = () => {
   // Example project data - replace with your own projects
   const projects = [
     {
-      title: 'Project 1',
-      description: 'A brief description of your first project. Explain what it does and what technologies you used.',
-      technologies: ['React', 'Node.js', 'MongoDB'],
-      github: 'https://github.com/yourusername/project1',
-      live: 'https://project1.com',
-      image: 'Project 1'
+      title: 'TrainLinkIT',
+      description: 'TrainLinkIT is a full-stack web application designed to connect users with tech training programs, job boards, and real-time messaging. Built with React and Firebase, it includes authentication, dynamic routing, and private user areas.',
+      technologies: ['React', 'Firebase', 'React Router', 'GitHub Actions', 'GitHub Pages'],
+      github: 'https://github.com/farouk-afolabi/TrainLinkIT',
+      live: 'https://farouk-afolabi.github.io/TrainLinkIT',
+      image: 'TrainLinkIT Screenshot' // Replace with actual image if applicable
     },
     {
       title: 'Project 2',
