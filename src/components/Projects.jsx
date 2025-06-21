@@ -125,11 +125,11 @@ const Projects = () => {
       image: 'TrainLinkIT Screenshot' // Replace with actual image if applicable
     },
     {
-      title: 'Project 2',
-      description: 'A brief description of your second project. Explain what it does and what technologies you used.',
-      technologies: ['React', 'Firebase', 'Tailwind CSS'],
-      github: 'https://github.com/yourusername/project2',
-      live: 'https://project2.com',
+      title: 'Todo App with React & Firebase',
+      description: 'A modern, responsive Todo application that lets users create, complete, and delete tasks in real time. It leverages React for a dynamic UI, Firebase for backend services (Firestore & Authentication), and is styled using Sass for modular and maintainable CSS.',
+      technologies: ['React', 'Firebase','Sass (SCSS)'],
+      github: 'https://github.com/farouk-afolabi/TodoApp',
+      live: 'https://farouk-afolabi.github.io/TodoApp/',
       image: 'Project 2'
     },
     // Add more projects here
