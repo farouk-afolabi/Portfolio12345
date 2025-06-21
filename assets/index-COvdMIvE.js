@@ -62,6 +62,11 @@ Error generating stack: `+n.message+`
         box-sizing: border-box;
       }
 
+
+  html, body, #root {
+    height: 100%;
+  }
+    
       html {
         scroll-behavior: smooth;
       }
@@ -112,7 +117,7 @@ Error generating stack: `+n.message+`
 
       .container {
         width: 100%;
-        max-width: 1200px;
+         min-height: 100vh;
         margin: 0 auto;
         padding: 0 ${w.spacing.md};
       }
@@ -134,7 +139,7 @@ Error generating stack: `+n.message+`
   padding: 0 ${w.spacing.md};
 `,DE=nt.a`
   font-size: ${w.fontSizes.xl};
-  font-weight: 700;
+  font-weight: 500;
   color: ${w.colors.primary};
 `,RE=nt.div`
   display: flex;
@@ -175,7 +180,7 @@ Error generating stack: `+n.message+`
     flex-direction: column;
     gap: ${w.spacing.md};
   }
-`,wE=()=>{const[i,a]=Q.useState(!1),s=()=>a(!i),o=[{href:"#home",label:"Home"},{href:"#about",label:"About"},{href:"#skills",label:"Skills"},{href:"#projects",label:"Projects"},{href:"#contact",label:"Contact"}];return G.jsxs(EE,{children:[G.jsxs(ME,{children:[G.jsx(DE,{href:"#home",children:"Portfolio"}),G.jsx(RE,{children:o.map(c=>G.jsx(ig,{href:c.href,children:c.label},c.href))}),G.jsx(OE,{onClick:s,children:i?G.jsx(AE,{}):G.jsx(TE,{})})]}),G.jsx(CE,{initial:{x:"100%"},animate:{x:i?0:"100%"},transition:{type:"tween"},children:o.map(c=>G.jsx(ig,{href:c.href,onClick:()=>a(!1),children:c.label},c.href))})]})},zE=nt.section`
+`,wE=()=>{const[i,a]=Q.useState(!1),s=()=>a(!i),o=[{href:"#home",label:"Home"},{href:"#about",label:"About"},{href:"#skills",label:"Skills"},{href:"#projects",label:"Projects"},{href:"#contact",label:"Contact"}];return G.jsxs(EE,{children:[G.jsxs(ME,{children:[G.jsx(DE,{href:"#home",children:"Farouks Portfolio"}),G.jsx(RE,{children:o.map(c=>G.jsx(ig,{href:c.href,children:c.label},c.href))}),G.jsx(OE,{onClick:s,children:i?G.jsx(AE,{}):G.jsx(TE,{})})]}),G.jsx(CE,{initial:{x:"100%"},animate:{x:i?0:"100%"},transition:{type:"tween"},children:o.map(c=>G.jsx(ig,{href:c.href,onClick:()=>a(!1),children:c.label},c.href))})]})},zE=nt.section`
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -206,11 +211,11 @@ Error generating stack: `+n.message+`
   color: ${w.colors.text};
 `,BE=nt(Wt.h3)`
   font-size: ${w.fontSizes.xl};
-  color: ${w.colors.textLight};
+  color: ${w.colors.text};
   font-weight: 500;
 `,NE=nt(Wt.p)`
   font-size: ${w.fontSizes.lg};
-  color: ${w.colors.textLight};
+  color: ${w.colors.text};
   max-width: 600px;
 `,LE=nt(Wt.div)`
   display: flex;
@@ -229,7 +234,7 @@ Error generating stack: `+n.message+`
     color: ${w.colors.primary};
     transform: translateY(-2px);
   }
-`,HE=()=>G.jsx(zE,{id:"home",children:G.jsx(_E,{children:G.jsxs(VE,{children:[G.jsx(jE,{initial:{opacity:0,y:20},animate:{opacity:1,y:0},transition:{duration:.5},children:"Hello, I'm"}),G.jsx(UE,{initial:{opacity:0,y:20},animate:{opacity:1,y:0},transition:{duration:.5,delay:.1},children:"Farouk Afolabi"}),G.jsx(BE,{initial:{opacity:0,y:20},animate:{opacity:1,y:0},transition:{duration:.5,delay:.2},children:"Web Developer"}),G.jsx(NE,{initial:{opacity:0,y:20},animate:{opacity:1,y:0},transition:{duration:.5,delay:.3},children:"I create beautiful and functional web applications using modern technologies. Passionate about building user-friendly experiences and solving complex problems."}),G.jsxs(LE,{initial:{opacity:0,y:20},animate:{opacity:1,y:0},transition:{duration:.5,delay:.4},children:[G.jsx(vc,{href:"https:/https://github.com/farouk-afolabi",target:"_blank",rel:"noopener noreferrer",children:G.jsx(J0,{})}),G.jsx(vc,{href:"https:/https://www.linkedin.com/in/farouk-afolabi/",target:"_blank",rel:"noopener noreferrer",children:G.jsx(bE,{})}),G.jsx(vc,{href:"mailto:farouk.afolabi@yahoo.com",children:G.jsx(W0,{})})]})]})})}),qE=nt.section`
+`,HE=()=>G.jsx(zE,{id:"home",children:G.jsx(_E,{children:G.jsxs(VE,{children:[G.jsx(jE,{initial:{opacity:0,y:20},animate:{opacity:1,y:0},transition:{duration:.5},children:"Hello, I'm"}),G.jsx(UE,{initial:{opacity:0,y:20},animate:{opacity:1,y:0},transition:{duration:.5,delay:.1},children:"Farouk Afolabi"}),G.jsx(BE,{initial:{opacity:0,y:20},animate:{opacity:1,y:0},transition:{duration:.5,delay:.2},children:"Fullstack Developer"}),G.jsx(NE,{initial:{opacity:0,y:20},animate:{opacity:1,y:0},transition:{duration:.5,delay:.3},children:"I create beautiful and functional web applications using modern technologies. Passionate about building user-friendly experiences and solving complex problems."}),G.jsxs(LE,{initial:{opacity:0,y:20},animate:{opacity:1,y:0},transition:{duration:.5,delay:.4},children:[G.jsx(vc,{href:"https:/https://github.com/farouk-afolabi",target:"_blank",rel:"noopener noreferrer",children:G.jsx(J0,{})}),G.jsx(vc,{href:"https:/https://www.linkedin.com/in/farouk-afolabi/",target:"_blank",rel:"noopener noreferrer",children:G.jsx(bE,{})}),G.jsx(vc,{href:"mailto:farouk.afolabi@yahoo.com",children:G.jsx(W0,{})})]})]})})}),qE=nt.section`
   background-color: ${w.colors.background};
   padding: ${w.spacing["2xl"]} 0;
 `,YE=nt.div`
@@ -287,7 +292,7 @@ Error generating stack: `+n.message+`
   padding: ${w.spacing["2xl"]} 0;
   color: ${w.colors.textDark};
 `,$E=nt.div`
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 ${w.spacing.md};
 `,PE=nt(Wt.h2)`
