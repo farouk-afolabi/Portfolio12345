@@ -5,13 +5,24 @@ const cors = require('cors');
 const nodemailer = require('nodemailer');
 
 const app = express();
-app.use(cors());
+
+// Restrict CORS to your frontend domain for security
+app.use(cors({
+  origin: 'https://faroukafolabi.com', // change if your frontend URL differs
+}));
+
 app.use(express.json());
 
+// Health check route — test your backend is live
+app.get('/', (req, res) => {
+  res.send('Backend is running!');
+});
+
 app.post('/contact', async (req, res) => {
+  console.log('Received contact data:', req.body); // for debugging
+
   const { name, email, subject, message } = req.body;
 
-  // Create transporter
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -30,7 +41,7 @@ app.post('/contact', async (req, res) => {
 
     res.status(200).json({ message: 'Email sent successfully.' });
   } catch (err) {
-    console.error(err);
+    console.error('Error sending email:', err);
     res.status(500).json({ message: 'Failed to send email.' });
   }
 });
