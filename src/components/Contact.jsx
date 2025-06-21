@@ -125,11 +125,31 @@ const SubmitButton = styled(motion.button)`
 `;
 
 const Contact = () => {
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your form submission logic here
-    console.log('Form submitted');
+  
+    const formData = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      subject: e.target.subject.value,
+      message: e.target.message.value,
+    };
+  
+    try {
+      const res = await fetch('http://localhost:5000/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+  
+      const result = await res.json();
+      alert(result.message);
+    } catch (error) {
+      console.error('Email error:', error);
+      alert('Something went wrong. Please try again later.');
+    }
   };
+  
 
   return (
     <ContactSection id="contact">
