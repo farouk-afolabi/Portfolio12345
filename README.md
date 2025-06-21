@@ -1,12 +1,29 @@
-# React + Vite
+🌟 Farouk Afolabi's Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Live Demo
+https://faroukafolabi.com
 
-Currently, two official plugins are available:
+🛠️ Technologies Used
+Frontend: React 19, Vite
+Styling: Emotion (CSS-in-JS)
+Animations: Framer Motion
+Routing: React Router v7
+Icons: React Icons
+Linting: ESLint
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✨ Features
+- 🔥 Fully responsive design
+- ⚡ Fast performance (Vite-powered)
+- 🎨 Custom theming with Emotion
+- 🌐 Smooth scroll navigation and routing
+- 💫 Mobile menu animation with Framer Motion
+- 🧠 Accessible, semantic HTML
+- 🔒 Hosted on a custom domain via GitHub Pages
 
-## Expanding the ESLint configuration
+🚀 Deployment (Automated with GitHub Actions)
+This site is deployed automatically using GitHub Actions to the gh-pages branch. The final output is hosted at faroukafolabi.com.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🤝 Contact
+Email: farouk.afolabi@yahoo.com
+LinkedIn: linkedin.com/in/farouk-afolabi
+GitHub: github.com/farouk-afolabi
