@@ -44,13 +44,13 @@ const Name = styled(motion.h2)`
 
 const Title = styled(motion.h3)`
   font-size: ${theme.fontSizes.xl};
-  color: ${theme.colors.textLight};
+  color: ${theme.colors.text};
   font-weight: 500;
 `;
 
 const Description = styled(motion.p)`
   font-size: ${theme.fontSizes.lg};
-  color: ${theme.colors.textLight};
+  color: ${theme.colors.text};
   max-width: 600px;
 `;
 
@@ -99,7 +99,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Web Developer
+          Fullstack Developer
           </Title>
           <Description
             initial={{ opacity: 0, y: 20 }}

@@ -26,7 +26,7 @@ const NavContainer = styled.div`
 
 const Logo = styled.a`
   font-size: ${theme.fontSizes.xl};
-  font-weight: 700;
+  font-weight: 500;
   color: ${theme.colors.primary};
 `;
 
@@ -93,7 +93,7 @@ const Navbar = () => {
   return (
     <Nav>
       <NavContainer>
-        <Logo href="#home">Portfolio</Logo>
+        <Logo href="#home">Farouks Portfolio</Logo>
         <NavLinks>
           {menuItems.map((item) => (
             <NavLink key={item.href} href={item.href}>

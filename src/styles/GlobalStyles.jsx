@@ -12,6 +12,11 @@ export const GlobalStyles = () => (
         box-sizing: border-box;
       }
 
+
+  html, body, #root {
+    height: 100%;
+  }
+    
       html {
         scroll-behavior: smooth;
       }
@@ -62,7 +67,7 @@ export const GlobalStyles = () => (
 
       .container {
         width: 100%;
-        max-width: 1200px;
+         min-height: 100vh;
         margin: 0 auto;
         padding: 0 ${theme.spacing.md};
       }
