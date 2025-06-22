@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
-import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiSend } from 'react-icons/fi';
 import { theme } from '../styles/theme';
+import { useState } from 'react';
 
 const ContactSection = styled.section`
   background-color: ${theme.colors.background};
@@ -124,29 +125,85 @@ const SubmitButton = styled(motion.button)`
   }
 `;
 
+
+const SuccessMessage = styled(motion.div)`
+  background-color: ${theme.colors.successLight};
+  color: ${theme.colors.success};
+  padding: ${theme.spacing.md};
+  border-radius: 4px;
+  font-size: ${theme.fontSizes.base};
+  text-align: center;
+  margin-top: ${theme.spacing.md};
+  border: 1px solid ${theme.colors.success};
+`;
+
+const ErrorMessage = styled(SuccessMessage)`
+  background-color: ${theme.colors.errorLight};
+  color: ${theme.colors.error};
+  border-color: ${theme.colors.error};
+`;
+
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [status, setStatus] = useState({
+    submitting: false,
+    success: false,
+    error: false,
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const formData = {
-      name: e.target.name.value,
-      email: e.target.email.value,
-      subject: e.target.subject.value,
-      message: e.target.message.value,
-    };
+    setStatus({ submitting: true, success: false, error: false });
   
     try {
-      const res = await fetch('https://portfolio12345-backend.onrender.com', {
+      const response = await fetch('https://portfolio12345-backend.onrender.com/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: e.target.name.value,
+          email: e.target.email.value,
+          subject: e.target.subject.value,
+          message: e.target.message.value
+        }),
       });
   
-      const result = await res.json();
-      alert(result.message);
+      const data = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send message');
+      }
+  
+      setStatus({
+        submitting: false,
+        success: true,
+        message: data.message
+      });
+  
+      // Reset form
+      e.target.reset();
+  
     } catch (error) {
-      console.error('Email error:', error);
-      alert('Something went wrong. Please try again later.');
+      setStatus({
+        submitting: false,
+        error: true,
+        message: error.message || 'An unexpected error occurred'
+      });
     }
   };
   
@@ -200,31 +257,85 @@ const Contact = () => {
         >
           <FormGroup>
             <Label htmlFor="name">Name</Label>
-            <Input type="text" id="name" name="name" required />
+            <Input 
+              type="text" 
+              id="name" 
+              name="name" 
+              value={formData.name}
+              onChange={handleChange}
+              required 
+            />
           </FormGroup>
           <FormGroup>
             <Label htmlFor="email">Email</Label>
-            <Input type="email" id="email" name="email" required />
+            <Input 
+              type="email" 
+              id="email" 
+              name="email" 
+              value={formData.email}
+              onChange={handleChange}
+              required 
+            />
           </FormGroup>
           <FormGroup>
             <Label htmlFor="subject">Subject</Label>
-            <Input type="text" id="subject" name="subject" required />
+            <Input 
+              type="text" 
+              id="subject" 
+              name="subject" 
+              value={formData.subject}
+              onChange={handleChange}
+              required 
+            />
           </FormGroup>
           <FormGroup>
             <Label htmlFor="message">Message</Label>
-            <TextArea id="message" name="message" required />
+            <TextArea 
+              id="message" 
+              name="message" 
+              value={formData.message}
+              onChange={handleChange}
+              required 
+            />
           </FormGroup>
           <SubmitButton
             type="submit"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            disabled={status.submitting}
           >
-            Send Message
+            {status.submitting ? (
+              'Sending...'
+            ) : (
+              <>
+                <FiSend /> Send Message
+              </>
+            )}
           </SubmitButton>
+          
+          {status.success && (
+            <SuccessMessage
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+            >
+              {status.message}
+            </SuccessMessage>
+          )}
+          
+          {status.error && (
+            <ErrorMessage
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+            >
+              {status.message}
+            </ErrorMessage>
+          )}
         </ContactForm>
       </ContactContainer>
     </ContactSection>
   );
 };
 
-export default Contact; 
+export default Contact;
