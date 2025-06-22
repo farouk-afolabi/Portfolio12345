@@ -1,48 +1,84 @@
-// server/index.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 
-// Restrict CORS to your frontend domain for security
-app.use(cors({
-  origin: 'https://faroukafolabi.com', // change if your frontend URL differs
-}));
-
-app.use(express.json());
-
-// Health check route — test your backend is live
-app.get('/', (req, res) => {
-  res.send('Backend is running!');
+// Rate limiting (5 requests per 15 minutes)
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: 'Too many requests from this IP, please try again later.'
 });
 
-app.post('/contact', async (req, res) => {
-  console.log('Received contact data:', req.body); // for debugging
+// Middleware
+app.use(cors({
+  origin: [
+    'https://faroukafolabi.com',
+    'http://localhost:3000' // For development
+  ],
+  optionsSuccessStatus: 200
+}));
+app.use(express.json());
+app.use(limiter);
 
-  const { name, email, subject, message } = req.body;
+// Health check
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'healthy' });
+});
 
+// Contact endpoint
+app.post('/api/contact', async (req, res) => {
+    console.log('Received contact request with body:', req.body); // Debug log
+    
+    // Validation
+    if (!req.body || Object.keys(req.body).length === 0) {
+      console.error('Empty request body received');
+      return res.status(400).json({ success: false, message: 'Request body is empty' });
+    }
+  
+    const { name, email, subject, message } = req.body;
+    console.log('Parsed fields:', { name, email, subject, message });
+
+  // Email configuration
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.EMAIL_USER, // your Gmail address
-      pass: process.env.EMAIL_PASS, // your Gmail app password
-    },
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
+    }
   });
 
-  try {
-    await transporter.sendMail({
-      from: email,
-      to: process.env.EMAIL_USER,
-      subject: `[Portfolio] ${subject}`,
-      text: `From: ${name} <${email}>\n\n${message}`,
-    });
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER, // Or your personal email
+    replyTo: email,
+    subject: `[Portfolio Contact] ${subject}`,
+    text: `You have a new contact request:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+    html: `
+      <h2>New Contact Form Submission</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Subject:</strong> ${subject}</p>
+      <p><strong>Message:</strong></p>
+      <p>${message.replace(/\n/g, '<br>')}</p>
+    `
+  };
 
-    res.status(200).json({ message: 'Email sent successfully.' });
-  } catch (err) {
-    console.error('Error sending email:', err);
-    res.status(500).json({ message: 'Failed to send email.' });
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ 
+      success: true,
+      message: 'Message sent successfully!' 
+    });
+  } catch (error) {
+    console.error('Mail send error:', error);
+    res.status(500).json({ 
+      success: false,
+      message: 'Failed to send message. Please try again later.' 
+    });
   }
 });
 
