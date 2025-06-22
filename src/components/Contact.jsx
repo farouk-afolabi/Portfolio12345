@@ -224,7 +224,6 @@ const Contact = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
-        signal: AbortSignal.timeout(8000) // 8 second timeout
       });
 
       if (!response.ok) {
