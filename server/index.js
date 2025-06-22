@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 
 // Contact endpoint
 app.post('/api/contact', async (req, res) => {
-  console.log('📩 Contact request received', req.body); 
+  console.log('Contact request received', req.body); 
   
   try {
     // Validate required fields
