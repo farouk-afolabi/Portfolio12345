@@ -25,5 +25,7 @@ This site is deployed automatically using GitHub Actions to the gh-pages branch.
 
 🤝 Contact
 Email: farouk.afolabi@yahoo.com
+
 LinkedIn: linkedin.com/in/farouk-afolabi
+
 GitHub: github.com/farouk-afolabi
