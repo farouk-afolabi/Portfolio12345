@@ -5,4 +5,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/', // For GitHub Pages  use '/Portfolio12345/'
+  build: {
+    outDir: 'dist',
+    copyPublicDir: true // Ensures CNAME is preserved
+  }
 })
