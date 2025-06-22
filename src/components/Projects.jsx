@@ -60,8 +60,24 @@ const ProjectImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  position: relative;
   color: ${theme.colors.textLight};
   font-size: ${theme.fontSizes.xl};
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    padding: 8px;
+    object-position: top;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05); 
+  }
 `;
 
 const ProjectContent = styled.div`
@@ -114,7 +130,6 @@ const ProjectLink = styled.a`
 `;
 
 const Projects = () => {
-  // Example project data - replace with your own projects
   const projects = [
     {
       title: 'TrainLinkIT',
@@ -122,7 +137,7 @@ const Projects = () => {
       technologies: ['React', 'Firebase', 'React Router', 'GitHub Actions', 'GitHub Pages'],
       github: 'https://github.com/farouk-afolabi/TrainLinkIT',
       live: 'https://farouk-afolabi.github.io/TrainLinkIT',
-      image: 'TrainLinkIT Screenshot' // Replace with actual image if applicable
+      image: '/images/TrainLinkIT.PNG' 
     },
     {
       title: 'Todo App with React & Firebase',
@@ -130,7 +145,7 @@ const Projects = () => {
       technologies: ['React', 'Firebase','Sass (SCSS)'],
       github: 'https://github.com/farouk-afolabi/TodoApp',
       live: 'https://farouk-afolabi.github.io/TodoApp/',
-      image: 'Project 2'
+      image: '/images/TodoApp.png'
     },
     // Add more projects here
   ];
@@ -160,7 +175,7 @@ const Projects = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
             >
-              <ProjectImage>{project.image}</ProjectImage>
+              <ProjectImage> <img src={project.image} alt={project.title} /></ProjectImage>
               <ProjectContent>
                 <ProjectTitle>{project.title}</ProjectTitle>
                 <ProjectDescription>{project.description}</ProjectDescription>

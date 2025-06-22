@@ -93,7 +93,7 @@ const Navbar = () => {
   return (
     <Nav>
       <NavContainer>
-        <Logo href="#home">Farouks Portfolio</Logo>
+        <Logo href="#home">Farouk's Portfolio</Logo>
         <NavLinks>
           {menuItems.map((item) => (
             <NavLink key={item.href} href={item.href}>
