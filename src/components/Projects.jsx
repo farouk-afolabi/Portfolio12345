@@ -147,6 +147,14 @@ const Projects = () => {
       live: 'https://farouk-afolabi.github.io/TodoApp/',
       image: '/images/TodoApp.png'
     },
+    {
+      title: 'Sociable',
+      description: ' Sociable is a full-stack social media web application which was designed to provide users with a seamless and modern social media experience. The app allows registered users to create posts, comment, like, follow others, and engage in real-time private messaging.',
+      technologies: ['React', 'Firebase (Auth + Firestore)','React Router', 'Material UI','GitHub Actions', 'GitHub Pages'],
+      github: 'https://github.com/farouk-afolabi/Sociable',
+      live: 'https://farouk-afolabi.github.io/Sociable/',
+      image: '/images/Sociable.PNG'
+    },
     // Add more projects here
   ];
 
