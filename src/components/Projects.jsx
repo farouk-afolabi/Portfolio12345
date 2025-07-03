@@ -131,6 +131,15 @@ const ProjectLink = styled.a`
 
 const Projects = () => {
   const projects = [
+
+    {
+      title: "Farouk's Sports Store",
+      description: 'Sports Store is a full-stack e-commerce application built with Angular 9 and Node.js. It features a responsive UI, JWT authentication, a mock API powered by JSON Server and Express, and full cart and product management functionality.',
+      technologies: ['Angular 9', 'Bootstrap', 'Node.js', 'Express', 'JSON Server', 'JWT'],
+      github: 'https://github.com/farouk-afolabi/sports-store',
+      live: 'https://farouk-afolabi.github.io/sports-store/', 
+      image: '/images/Farouks Sport store.png' 
+    },    
     {
       title: 'TrainLinkIT',
       description: 'TrainLinkIT is a full-stack web application designed to connect users with tech training programs, job boards, and real-time messaging. Built with React and Firebase, it includes authentication, dynamic routing, and private user areas.',
