@@ -35,8 +35,9 @@ const SectionTitle = styled(motion.h2)`
 `;
 
 const ProjectsGrid = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  
+ 
   gap: ${theme.spacing.xl};
 `;
 
