@@ -135,7 +135,7 @@ const Projects = () => {
     {
       title: "Farouk's Sports Store",
       description: 'Sports Store is a full-stack e-commerce application built with Angular 9 and Node.js. It features a responsive UI, JWT authentication, a mock API powered by JSON Server and Express, and full cart and product management functionality.',
-      technologies: ['Angular 9', 'Bootstrap', 'Node.js', 'Express', 'JSON Server', 'JWT'],
+      technologies: ['Angular 9', 'Bootstrap', 'Node.js', 'Express', 'JSON Server', 'JWT', 'Docker', 'Github Pages', 'Github Actions'],
       github: 'https://github.com/farouk-afolabi/sports-store',
       live: 'https://farouk-afolabi.github.io/sports-store/', 
       image: '/images/Farouks Sport store.png' 
@@ -164,7 +164,7 @@ const Projects = () => {
       live: 'https://farouk-afolabi.github.io/Sociable/',
       image: '/images/Sociable.PNG'
     },
-    // Add more projects here
+    
   ];
 
   return (
