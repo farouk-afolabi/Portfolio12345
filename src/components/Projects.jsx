@@ -35,9 +35,8 @@ const SectionTitle = styled(motion.h2)`
 `;
 
 const ProjectsGrid = styled(motion.div)`
-  display: flex;
-  
- 
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: ${theme.spacing.xl};
 `;
 
@@ -47,7 +46,6 @@ const ProjectCard = styled(motion.div)`
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: ${theme.transitions.default};
-
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);

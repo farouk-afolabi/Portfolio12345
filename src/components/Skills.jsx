@@ -56,12 +56,21 @@ const SkillItem = styled(motion.div)`
 
 const Skills = () => {
   const skills = [
-    'HTML5 & CSS3',
-    'JavaScript (ES6+)',
+    'Angular',
     'React.js',
-    'Node.js',
-    'Git & GitHub',
+    'TypeScript',
+    'JavaScript (ES6+)',
+    'HTML5 & CSS3',
     'Responsive Design',
+    'Node.js',
+    'CI/CD Pipelines',
+    'Docker',
+    'Full-Stack Deployment',
+    'Git & GitHub',
+    'WordPress',
+    
+    
+    
   ];
 
   return (
