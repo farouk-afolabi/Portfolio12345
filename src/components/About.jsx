@@ -3,9 +3,15 @@ import { motion } from 'framer-motion';
 import { FiAward, FiBook, FiUsers, FiGlobe } from 'react-icons/fi';
 import { theme } from '../styles/theme';
 
+
 const AboutSection = styled.section`
   padding: 120px 0;
   background: ${theme.colors.backgroundLight};
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: 80px 0;
+    background: ${theme.colors.backgroundDark};
+  }
 `;
 
 const Container = styled.div`
@@ -19,6 +25,7 @@ const SectionTitle = styled(motion.h2)`
   margin-bottom: ${theme.spacing.xl};
   text-align: center;
   position: relative;
+  color: ${theme.colors.text};
 
   &::after {
     content: '';
@@ -30,6 +37,11 @@ const SectionTitle = styled(motion.h2)`
     height: 3px;
     background: ${theme.colors.primary};
   }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    color: ${theme.colors.textLight};
+    font-size: ${theme.fontSizes['2xl']};
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -40,6 +52,7 @@ const ContentWrapper = styled.div`
 
   @media (max-width: ${theme.breakpoints.md}) {
     grid-template-columns: 1fr;
+    gap: ${theme.spacing.lg};
   }
 `;
 
@@ -47,6 +60,15 @@ const AboutText = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.md};
+  
+  p {
+    color: ${theme.colors.text}; 
+    line-height: 1.6;
+    
+    @media (max-width: ${theme.breakpoints.md}) {
+      color: ${theme.colors.textLight};
+    }
+  }
 `;
 
 const HighlightText = styled.span`
@@ -84,10 +106,16 @@ const AchievementItem = styled(motion.div)`
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    background: rgba(255, 255, 255, 0.1);
   }
 `;
 
@@ -109,12 +137,20 @@ const AchievementContent = styled.div``;
 const AchievementTitle = styled.h3`
   font-size: ${theme.fontSizes.lg};
   margin-bottom: ${theme.spacing.xs};
-  color: ${theme.colors.text};
+  color: ${theme.colors.text}; 
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    color: ${theme.colors.textLight};
+  }
 `;
 
 const AchievementDescription = styled.p`
-  color: ${theme.colors.textSecondary};
+  color: ${theme.colors.textSecondaryDark}; // Add this to your theme
   line-height: 1.6;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    color: rgba(255, 255, 255, 0.8);
+  }
 `;
 
 const About = () => {
