@@ -36,18 +36,6 @@ const HeroSection = styled.section`
   background: linear-gradient(135deg, ${theme.colors.background} 0%, ${theme.colors.backgroundDark} 100%);
   position: relative;
   overflow: hidden;
-
-  // Optional: Add subtle animated dots in the background
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='1' fill='%23${theme.colors.primary.replace('#', '')}' opacity='0.1'/%3E%3C/svg%3E");
-    z-index: 0;
-  }
 `;
 
 const HeroContainer = styled.div`
