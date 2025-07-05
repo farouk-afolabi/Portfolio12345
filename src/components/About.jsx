@@ -10,7 +10,7 @@ const AboutSection = styled.section`
   
   @media (max-width: ${theme.breakpoints.md}) {
     padding: 80px 0;
-    background: ${theme.colors.backgroundDark};
+    background: ${theme.colors.backgroundLight};
   }
 `;
 
@@ -140,16 +140,16 @@ const AchievementTitle = styled.h3`
   color: ${theme.colors.text}; 
   
   @media (max-width: ${theme.breakpoints.md}) {
-    color: ${theme.colors.textLight};
+    color: ${theme.colors.text};
   }
 `;
 
 const AchievementDescription = styled.p`
-  color: ${theme.colors.textSecondaryDark}; // Add this to your theme
+  color: ${theme.colors.text}; // Add this to your theme
   line-height: 1.6;
 
   @media (max-width: ${theme.breakpoints.md}) {
-    color: rgba(255, 255, 255, 0.8);
+    color: ${theme.colors.text};
   }
 `;
 
