@@ -30,7 +30,7 @@ const SkillsContainer = styled.div`
 
 const SectionTitle = styled(motion.h2)`
   font-size:  ${theme.fontSizes['3xl']};
-  color: ${theme.colors.textLight};  
+  color: ${theme.colors.background};  
   margin-bottom: ${theme.spacing.xl};
   position: relative;
   text-align: center;
