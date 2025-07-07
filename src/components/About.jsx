@@ -66,7 +66,7 @@ const AboutText = styled.div`
     line-height: 1.6;
     
     @media (max-width: ${theme.breakpoints.md}) {
-      color: ${theme.colors.textLight};
+      color: ${theme.colors.text};
     }
   }
 `;
@@ -145,7 +145,7 @@ const AchievementTitle = styled.h3`
 `;
 
 const AchievementDescription = styled.p`
-  color: ${theme.colors.text}; // Add this to your theme
+  color: ${theme.colors.text}; 
   line-height: 1.6;
 
   @media (max-width: ${theme.breakpoints.md}) {
