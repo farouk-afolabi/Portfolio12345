@@ -15,7 +15,9 @@
 - Node.js with Express  
 - Nodemailer for email delivery  
 - Rate limiting for security  
-- CORS protection  
+- CORS protection 
+- OpenAI SDK
+- OpenAI Model 
 
 ## ✨ Features
 ### Frontend
@@ -29,7 +31,9 @@
 📧 Contact form with email delivery  
 🛡️ Rate limiting (10 requests/15 minutes)  
 🔒 CORS protection with whitelisted origins  
-✅ Input validation and error handling  
+✅ Input validation and error handling
+/api/chat RESTful POST endpoint
+  
 
 ## 🚀 Deployment
 **Frontend**:  
