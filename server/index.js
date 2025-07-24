@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { Configuration, OpenAIApi } = require("openai");
+const OpenAI = require('openai');
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
@@ -44,21 +44,20 @@ app.get("/", (req, res) => {
 
 //Chatbot AI route
 
-app.post("/api/chat", async (req, res) => {
-  const { message } = req.body;
-  if (!message) return res.status(400).json({ error: "No message provided" });
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
-  const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
-  const openai = new OpenAIApi(configuration);
+app.post('/api/chat', async (req, res) => {
+  const { message } = req.body;
+  if (!message) return res.status(400).json({ error: 'No message provided' });
 
   try {
-    const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo',
       messages: [
         {
-          role: "system",
+          role: 'system',
           content: `
 You are an AI assistant specialized in providing detailed, accurate, and up-to-date information about Farouk Afolabi. Only answer questions related to Farouk’s skills, education, experience, publications, background, and professional interests. If asked about anything outside this scope, politely decline.
 
@@ -147,18 +146,19 @@ Personality & Values:
 Note: If asked about anything unrelated to Farouk’s professional and educational background or skills, politely decline to answer.
 `,
         },
-        { role: "user", content: message },
+        { role: 'user', content: message },
       ],
       max_tokens: 200,
     });
 
-    const aiMessage = completion.data.choices[0].message.content;
+    const aiMessage = completion.choices[0].message.content;
     res.json({ response: aiMessage });
   } catch (err) {
-    console.error(err.response?.data || err.message);
-    res.status(500).json({ error: "Failed to get response from OpenAI" });
+    console.error(err);
+    res.status(500).json({ error: 'Failed to get response from OpenAI' });
   }
 });
+
 
 // Contact endpoint
 app.post("/api/contact", async (req, res) => {
