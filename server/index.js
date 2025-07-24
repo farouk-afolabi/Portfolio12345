@@ -43,7 +43,6 @@ app.get("/", (req, res) => {
 });
 
 //Chatbot AI route
-
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
