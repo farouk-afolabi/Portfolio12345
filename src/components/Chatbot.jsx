@@ -37,7 +37,7 @@ const Chatbot = () => {
 
       setMessages(prev => [
         ...prev.slice(0, -1), // Remove "Thinking..."
-        { sender: 'bot', text: data.reply || 'Something went wrong' },
+        { sender: 'bot', text: data.response || 'Something went wrong' },
       ]);
     } catch (err) {
       console.error(err);
