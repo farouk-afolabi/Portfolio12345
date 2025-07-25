@@ -22,6 +22,7 @@ function App() {
         <Contact />
         <Chatbot />
       </main>
+      <Chatbot />
     </ThemeProvider>
   );
 }
