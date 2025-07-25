@@ -34,7 +34,7 @@ const Chatbot = () => {
   
       const data = await response.json(); // Expecting something like { reply: "Hello there" }
   
-      if (data.reply) {
+      if (data.response) {
         setMessages(prev => [...prev, { sender: 'bot', text: data.reply }]);
       } else {
         setMessages(prev => [...prev, { sender: 'bot', text: 'No response from server.' }]);
@@ -50,7 +50,7 @@ const Chatbot = () => {
   return (
     <div style={styles.container}>
       <h1 style={styles.header}>Portfolio Chatbot</h1>
-
+  
       <div style={styles.chatBox}>
         {messages.map((msg, index) => (
           <div
@@ -62,12 +62,14 @@ const Chatbot = () => {
               color: msg.sender === 'user' ? 'white' : 'black',
             }}
           >
-            {msg.text}
+            {msg.text.split('\n').map((line, i) => (
+              <div key={i}>{line}</div>
+            ))}
           </div>
         ))}
         <div ref={messagesEndRef} />
       </div>
-
+  
       <form onSubmit={handleSend} style={styles.form}>
         <input
           type="text"
@@ -83,7 +85,7 @@ const Chatbot = () => {
       </form>
     </div>
   );
-};
+  };
 
 const styles = {
   container: {
