@@ -14,17 +14,42 @@ const Chatbot = () => {
     }
   }, [messages, open]);
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault();
+  
     if (!input.trim()) return;
-    setMessages([...messages, { sender: 'user', text: input }]);
-    setInput('');
-    // Placeholder for API call
-    setTimeout(() => {
-      setMessages(msgs => [...msgs, { sender: 'bot', text: 'Thinking...' }]);
-    }, 500);
+  
+    // Save input locally before clearing
+    const userMessage = input;
+  
+    setMessages(prev => [...prev, { sender: 'user', text: userMessage }]);
+    setInput(''); // clear input
+  
+    try {
+      // Show a temporary "thinking" message
+      setMessages(prev => [...prev, { sender: 'bot', text: 'Thinking...' }]);
+  
+      const response = await fetch('https://portfolio12345-backend.onrender.com/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMessage }),
+      });
+  
+      const data = await response.json();
+  
+      // Remove the temporary "thinking..." message and show the actual response
+      setMessages(prev => [
+        ...prev.slice(0, -1),
+        { sender: 'bot', text: data.reply || 'Something went wrong' },
+      ]);
+    } catch (err) {
+      console.error(err);
+      setMessages(prev => [
+        ...prev.slice(0, -1),
+        { sender: 'bot', text: 'Error communicating with server.' },
+      ]);
+    }
   };
-
   return (
     <>
       <button
