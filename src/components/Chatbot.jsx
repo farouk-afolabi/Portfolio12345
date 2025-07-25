@@ -12,41 +12,40 @@ const Chatbot = () => {
 
   const handleSend = async (e) => {
     e.preventDefault();
-    if (!input.trim() || loading) return;
-
-    const userMessage = { sender: 'user', text: input };
-    setMessages((prev) => [...prev, userMessage]);
+    if (!input.trim()) return;
+  
+    // Add user message
+    setMessages(prev => [...prev, { sender: 'user', text: input }]);
+  
+    // Save input and clear field
+    const userInput = input;
     setInput('');
-    setLoading(true);
-
-    // Show "Thinking..." while waiting
-    const thinkingMessage = { sender: 'bot', text: 'Thinking...' };
-    setMessages((prev) => [...prev, thinkingMessage]);
-
+  
     try {
       const response = await fetch('https://portfolio12345-backend.onrender.com/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ message: userInput }),
       });
-
-      const data = await response.json();
-
-      // Remove "Thinking..." and add actual response
-      setMessages((prev) => [
-        ...prev.slice(0, -1), // Remove last "Thinking..." message
-        { sender: 'bot', text: data.response || 'Something went wrong.' },
-      ]);
+  
+      if (!response.ok) {
+        throw new Error('Failed to get response from server');
+      }
+  
+      const data = await response.json(); // Expecting something like { reply: "Hello there" }
+  
+      if (data.reply) {
+        setMessages(prev => [...prev, { sender: 'bot', text: data.reply }]);
+      } else {
+        setMessages(prev => [...prev, { sender: 'bot', text: 'No response from server.' }]);
+      }
+  
     } catch (error) {
-      console.error('Error fetching response:', error);
-      setMessages((prev) => [
-        ...prev.slice(0, -1),
-        { sender: 'bot', text: 'An error occurred. Please try again.' },
-      ]);
-    } finally {
-      setLoading(false);
+      console.error('Error:', error);
+      setMessages(prev => [...prev, { sender: 'bot', text: 'Something went wrong. Please try again.' }]);
     }
   };
+  
 
   return (
     <div style={styles.container}>
