@@ -1,144 +1,153 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 const Chatbot = () => {
-  const [messages, setMessages] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [messages, setMessages] = useState([
+    { sender: 'bot', text: 'Hi! I am Farouk’s AI assistant. Ask me anything about Farouk!' }
+  ]);
   const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+    if (open && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, open]);
 
   const handleSend = async (e) => {
     e.preventDefault();
+
     if (!input.trim()) return;
-  
-    // Add user message
-    setMessages(prev => [...prev, { sender: 'user', text: input }]);
-  
-    // Save input and clear field
-    const userInput = input;
+
+    const userMessage = input;
+
+    setMessages(prev => [...prev, { sender: 'user', text: userMessage }]);
     setInput('');
-  
+
     try {
+      setMessages(prev => [...prev, { sender: 'bot', text: 'Thinking...' }]);
+
       const response = await fetch('https://portfolio12345-backend.onrender.com/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userInput }),
+        body: JSON.stringify({ message: userMessage }),
       });
-  
-      if (!response.ok) {
-        throw new Error('Failed to get response from server');
-      }
-  
-      const data = await response.json(); // Expecting something like { reply: "Hello there" }
-  
-      if (data.response) {
-        setMessages(prev => [...prev, { sender: 'bot', text: data.reply }]);
-      } else {
-        setMessages(prev => [...prev, { sender: 'bot', text: 'No response from server.' }]);
-      }
-  
-    } catch (error) {
-      console.error('Error:', error);
-      setMessages(prev => [...prev, { sender: 'bot', text: 'Something went wrong. Please try again.' }]);
+
+      const data = await response.json();
+
+      setMessages(prev => [
+        ...prev.slice(0, -1), // Remove "Thinking..."
+        { sender: 'bot', text: data.reply || 'Something went wrong' },
+      ]);
+    } catch (err) {
+      console.error(err);
+      setMessages(prev => [
+        ...prev.slice(0, -1),
+        { sender: 'bot', text: 'Error communicating with server.' },
+      ]);
     }
   };
-  
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.header}>Portfolio Chatbot</h1>
-  
-      <div style={styles.chatBox}>
-        {messages.map((msg, index) => (
-          <div
-            key={index}
-            style={{
-              ...styles.message,
-              alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start',
-              backgroundColor: msg.sender === 'user' ? '#4CAF50' : '#e0e0e0',
-              color: msg.sender === 'user' ? 'white' : 'black',
-            }}
-          >
-            {msg.text.split('\n').map((line, i) => (
-              <div key={i}>{line}</div>
-            ))}
+    <>
+      <button
+        onClick={() => setOpen(o => !o)}
+        style={{
+          position: 'fixed',
+          bottom: 24,
+          right: 24,
+          zIndex: 1000,
+          borderRadius: '50%',
+          width: 56,
+          height: 56,
+          background: '#2563eb',
+          color: '#fff',
+          border: 'none',
+          fontSize: 28,
+          boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+          cursor: 'pointer',
+        }}
+        aria-label="Open chatbot"
+      >
+        💬
+      </button>
+      {open && (
+        <div
+          style={{
+            position: 'fixed',
+            bottom: 90,
+            right: 24,
+            width: 320,
+            maxHeight: 480,
+            background: '#fff',
+            borderRadius: 12,
+            boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
+            display: 'flex',
+            flexDirection: 'column',
+            zIndex: 1001,
+          }}
+        >
+          <div style={{ padding: 16, borderBottom: '1px solid #eee', fontWeight: 600, color: '#2563eb' }}>
+            Farouk’s AI Chatbot
           </div>
-        ))}
-        <div ref={messagesEndRef} />
-      </div>
-  
-      <form onSubmit={handleSend} style={styles.form}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask me anything about my portfolio..."
-          style={styles.input}
-          disabled={loading}
-        />
-        <button type="submit" style={styles.button} disabled={loading}>
-          {loading ? 'Sending...' : 'Send'}
-        </button>
-      </form>
-    </div>
+          <div style={{ flex: 1, overflowY: 'auto', padding: 16, background: '#f8fafc' }}>
+            {messages.map((msg, i) => (
+              <div
+                key={i}
+                style={{
+                  marginBottom: 12,
+                  textAlign: msg.sender === 'user' ? 'right' : 'left',
+                }}
+              >
+                <span
+                  style={{
+                    display: 'inline-block',
+                    background: msg.sender === 'user' ? '#2563eb' : '#e0e7ef',
+                    color: msg.sender === 'user' ? '#fff' : '#222',
+                    borderRadius: 16,
+                    padding: '8px 14px',
+                    maxWidth: '80%',
+                    wordBreak: 'break-word',
+                    whiteSpace: 'pre-wrap', // to preserve whitespace and line breaks if any
+                  }}
+                >
+                  {msg.text}
+                </span>
+              </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+          <form
+            onSubmit={handleSend}
+            style={{ display: 'flex', borderTop: '1px solid #eee', padding: 8, background: '#fff' }}
+          >
+            <input
+              type="text"
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              placeholder="Ask me about Farouk..."
+              style={{ flex: 1, border: 'none', outline: 'none', fontSize: 16, padding: 8, borderRadius: 8 }}
+            />
+            <button
+              type="submit"
+              style={{
+                marginLeft: 8,
+                background: '#2563eb',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 8,
+                padding: '8px 16px',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
+            >
+              Send
+            </button>
+          </form>
+        </div>
+      )}
+    </>
   );
-  };
-
-const styles = {
-  container: {
-    maxWidth: '600px',
-    margin: '30px auto',
-    padding: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    fontFamily: 'Arial, sans-serif',
-    background: '#f9f9f9',
-  },
-  header: {
-    textAlign: 'center',
-    marginBottom: '20px',
-  },
-  chatBox: {
-    minHeight: '300px',
-    maxHeight: '400px',
-    overflowY: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-    padding: '10px',
-    backgroundColor: '#fff',
-    border: '1px solid #ccc',
-    borderRadius: '5px',
-  },
-  message: {
-    padding: '10px 15px',
-    borderRadius: '20px',
-    maxWidth: '70%',
-  },
-  form: {
-    display: 'flex',
-    marginTop: '15px',
-    gap: '10px',
-  },
-  input: {
-    flex: 1,
-    padding: '10px',
-    borderRadius: '20px',
-    border: '1px solid #ccc',
-    fontSize: '16px',
-  },
-  button: {
-    padding: '10px 20px',
-    borderRadius: '20px',
-    border: 'none',
-    backgroundColor: '#4CAF50',
-    color: '#fff',
-    fontSize: '16px',
-    cursor: 'pointer',
-  },
 };
 
 export default Chatbot;
