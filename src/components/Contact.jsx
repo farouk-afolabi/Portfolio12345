@@ -204,6 +204,7 @@ const Contact = () => {
     if (errors.length > 0) {
       setStatus({
         submitting: false,
+        success: false,
         error: true,
         message: `Please fill all required fields: ${errors.join(', ')}`
       });
@@ -213,6 +214,7 @@ const Contact = () => {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
       setStatus({
         submitting: false,
+        success: false,
         error: true,
         message: 'Please enter a valid email address'
       });
@@ -246,8 +248,9 @@ const Contact = () => {
       console.error('Submission error:', error);
       setStatus({
         submitting: false,
+        success: false,
         error: true,
-        message: error.name === 'AbortError' 
+        message: error.name === 'AbortError'
           ? 'Request timed out. Please try again.'
           : error.message || 'Network error. Please check your connection.'
       });

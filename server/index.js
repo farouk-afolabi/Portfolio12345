@@ -182,7 +182,6 @@ app.post("/api/contact", async (req, res) => {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
-      tls: { rejectUnauthorized: false }, // Remove in production if not needed
     });
 
     await transporter.sendMail({
@@ -208,6 +207,16 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
+// Escape user input before injecting into HTML
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 // Email formatting functions
 function formatPlainText(data) {
   return `
@@ -221,16 +230,19 @@ function formatPlainText(data) {
 }
 
 function formatHtmlEmail(data) {
+  const name = escapeHtml(data.name);
+  const email = escapeHtml(data.email);
+  const subject = escapeHtml(data.subject || "(No subject)");
+  const message = escapeHtml(data.message).replace(/\n/g, "<br>");
+
   return `
     <div style="font-family: Arial, sans-serif; max-width: 600px;">
       <h2 style="color: #333;">New Contact Form Submission</h2>
-      <p><strong>Name:</strong> ${data.name}</p>
-      <p><strong>Email:</strong> <a href="mailto:${data.email}">${
-    data.email
-  }</a></p>
-      <p><strong>Subject:</strong> ${data.subject || "(No subject)"}</p>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+      <p><strong>Subject:</strong> ${subject}</p>
       <div style="margin-top: 20px; padding: 10px; border-left: 3px solid #3498db;">
-        ${data.message.replace(/\n/g, "<br>")}
+        ${message}
       </div>
     </div>
   `;
