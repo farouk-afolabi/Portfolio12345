@@ -130,6 +130,14 @@ const ProjectLink = styled.a`
 
 const Projects = () => {
   const projects = [
+    {
+      title: "Job-Tracker App",
+      description: 'A full-stack job application tracker built as a portfolio project. Search real job listings across multiple sources, score how well each role matches your background using AI, and manage every application through your personal pipeline — from first look to offer or rejection.',
+      technologies: ['React 19, React Router v7, Material UI v7, Recharts, React Context API, Node.js, Express 5, MongoDB Atlas, Mongoose, JWT (jsonwebtoken), bcryptjs, Anthropic Claude API, Adzuna Jobs API (US + CA), Jooble API, node-cron, Nodemailer (Gmail SMTP),express-rate-limit, environment-based CORS, GitHub Pages (frontend), Render (backend)'],
+      github: 'https://farouk-afolabi.github.io/Job-Tracker',
+      live: 'https://farouk-afolabi.github.io/Job-Tracker', 
+      image: '/images/Job-Tracker.png' 
+    },
 
     {
       title: "Farouk's Sports Store",
