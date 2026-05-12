@@ -136,7 +136,7 @@ const Projects = () => {
       technologies: ['React 19, React Router v7, Material UI v7, Recharts, React Context API, Node.js, Express 5, MongoDB Atlas, Mongoose, JWT (jsonwebtoken), bcryptjs, Anthropic Claude API, Adzuna Jobs API (US + CA), Jooble API, node-cron, Nodemailer (Gmail SMTP),express-rate-limit, environment-based CORS, GitHub Pages (frontend), Render (backend)'],
       github: 'https://farouk-afolabi.github.io/Job-Tracker',
       live: 'https://farouk-afolabi.github.io/Job-Tracker', 
-      image: '/images/Job-Tracker.png' 
+      image: '/images/Job Tracker.png' 
     },
 
     {
