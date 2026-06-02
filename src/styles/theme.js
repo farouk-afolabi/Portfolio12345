@@ -1,15 +1,22 @@
 export const theme = {
   colors: {
     primary: '#2563eb',
+    primaryRgb: '37, 99, 235',
     secondary: '#3b82f6',
     background: '#ffffff',
     backgroundDark: '#0f172a',
+    backgroundLight: '#f8fafc',
     text: '#1e293b',
     textLight: '#64748b',
+    textSecondary: '#64748b',
     textDark: '#f8fafc',
     accent: '#f59e0b',
     error: '#ef4444',
+    errorLight: '#fee2e2',
     success: '#22c55e',
+    successLight: '#dcfce7',
+    border: '#e2e8f0',
+    inputBackground: '#f1f5f9',
   },
   fonts: {
     heading: "'Inter', sans-serif",

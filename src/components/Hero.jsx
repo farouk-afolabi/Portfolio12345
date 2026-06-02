@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiMail, FiCpu } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiMail, FiCpu, FiDownload } from 'react-icons/fi';
 import { theme } from '../styles/theme';
 
 
@@ -95,6 +95,89 @@ const Description = styled(motion.p)`
   line-height: 1.6;
 `;
 
+const CTAButtons = styled(motion.div)`
+  display: flex;
+  gap: ${theme.spacing.sm};
+  flex-wrap: wrap;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    justify-content: center;
+  }
+`;
+
+const ResumeButton = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: ${theme.colors.primary};
+  color: #ffffff;
+  font-size: ${theme.fontSizes.base};
+  font-weight: 600;
+  border-radius: 8px;
+  transition: ${theme.transitions.default};
+
+  &:hover {
+    background-color: ${theme.colors.secondary};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  }
+`;
+
+const ViewProjectsButton = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid ${theme.colors.primary};
+  color: ${theme.colors.primary};
+  font-size: ${theme.fontSizes.base};
+  font-weight: 600;
+  border-radius: 8px;
+  transition: ${theme.transitions.default};
+
+  &:hover {
+    background-color: ${theme.colors.primary};
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+`;
+
+const HeroVisual = styled(motion.div)`
+  background: ${theme.colors.backgroundDark};
+  border-radius: 16px;
+  padding: ${theme.spacing.lg};
+  font-family: 'Courier New', monospace;
+  font-size: ${theme.fontSizes.sm};
+  color: ${theme.colors.textDark};
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    display: none;
+  }
+`;
+
+const TerminalBar = styled.div`
+  display: flex;
+  gap: 6px;
+  margin-bottom: ${theme.spacing.sm};
+`;
+
+const TerminalDot = styled.span`
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: ${({ color }) => color};
+`;
+
+const CodeLine = styled.div`
+  line-height: 1.8;
+  color: ${({ color }) => color || theme.colors.textDark};
+`;
+
 const SocialLinks = styled(motion.div)`
   display: flex;
   gap: ${theme.spacing.md};
@@ -159,14 +242,27 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            Recent graduate specializing in React, Node.js, and responsive design. 
+            2025 graduate of Fanshawe College specializing in React, Node.js, and responsive design.
             I turn complex problems into elegant, user-friendly solutions.
           </Description>
+
+          <CTAButtons
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <ResumeButton href="/resume.pdf" download="Farouk_Afolabi_Resume.pdf">
+              <FiDownload /> Download Resume
+            </ResumeButton>
+            <ViewProjectsButton href="#projects">
+              View Projects
+            </ViewProjectsButton>
+          </CTAButtons>
 
           <SocialLinks
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
           >
             <SocialLink 
               href="https://github.com/farouk-afolabi" 
@@ -192,6 +288,31 @@ const Hero = () => {
             </SocialLink>
           </SocialLinks>
         </HeroContent>
+
+        <HeroVisual
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <TerminalBar>
+            <TerminalDot color="#ff5f57" />
+            <TerminalDot color="#febc2e" />
+            <TerminalDot color="#28c840" />
+          </TerminalBar>
+          <CodeLine color="#94a3b8">// farouk.js</CodeLine>
+          <CodeLine><span style={{ color: '#60a5fa' }}>const</span> <span style={{ color: '#f8fafc' }}>developer</span> <span style={{ color: '#94a3b8' }}>=</span> {'{'}</CodeLine>
+          <CodeLine>&nbsp;&nbsp;<span style={{ color: '#34d399' }}>name</span><span style={{ color: '#94a3b8' }}>:</span> <span style={{ color: '#fbbf24' }}>"Farouk Afolabi"</span><span style={{ color: '#94a3b8' }}>,</span></CodeLine>
+          <CodeLine>&nbsp;&nbsp;<span style={{ color: '#34d399' }}>role</span><span style={{ color: '#94a3b8' }}>:</span> <span style={{ color: '#fbbf24' }}>"Full-Stack Developer"</span><span style={{ color: '#94a3b8' }}>,</span></CodeLine>
+          <CodeLine>&nbsp;&nbsp;<span style={{ color: '#34d399' }}>stack</span><span style={{ color: '#94a3b8' }}>:</span> [</CodeLine>
+          <CodeLine>&nbsp;&nbsp;&nbsp;&nbsp;<span style={{ color: '#fbbf24' }}>"React"</span><span style={{ color: '#94a3b8' }}>,</span> <span style={{ color: '#fbbf24' }}>"Node.js"</span><span style={{ color: '#94a3b8' }}>,</span></CodeLine>
+          <CodeLine>&nbsp;&nbsp;&nbsp;&nbsp;<span style={{ color: '#fbbf24' }}>"MongoDB"</span><span style={{ color: '#94a3b8' }}>,</span> <span style={{ color: '#fbbf24' }}>"Express"</span></CodeLine>
+          <CodeLine>&nbsp;&nbsp;]<span style={{ color: '#94a3b8' }}>,</span></CodeLine>
+          <CodeLine>&nbsp;&nbsp;<span style={{ color: '#34d399' }}>available</span><span style={{ color: '#94a3b8' }}>:</span> <span style={{ color: '#60a5fa' }}>true</span></CodeLine>
+          <CodeLine>{'}'}<span style={{ color: '#94a3b8' }}>;</span></CodeLine>
+          <CodeLine>&nbsp;</CodeLine>
+          <CodeLine color="#94a3b8">// Open to opportunities</CodeLine>
+          <CodeLine><span style={{ color: '#60a5fa' }}>export default</span> <span style={{ color: '#f8fafc' }}>developer</span><span style={{ color: '#94a3b8' }}>;</span></CodeLine>
+        </HeroVisual>
       </HeroContainer>
     </HeroSection>
   );

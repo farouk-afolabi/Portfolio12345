@@ -49,6 +49,20 @@ const NavLink = styled.a`
   }
 `;
 
+const ResumeNavButton = styled.a`
+  padding: 0.5rem 1.25rem;
+  background-color: ${theme.colors.primary};
+  color: #ffffff;
+  font-weight: 600;
+  font-size: ${theme.fontSizes.sm};
+  border-radius: 6px;
+  transition: ${theme.transitions.default};
+
+  &:hover {
+    background-color: ${theme.colors.secondary};
+  }
+`;
+
 const MobileMenuButton = styled.button`
   display: none;
   font-size: ${theme.fontSizes.xl};
@@ -100,6 +114,9 @@ const Navbar = () => {
               {item.label}
             </NavLink>
           ))}
+          <ResumeNavButton href="/resume.pdf" download="Farouk_Afolabi_Resume.pdf">
+            Resume
+          </ResumeNavButton>
         </NavLinks>
         <MobileMenuButton onClick={toggleMenu}>
           {isOpen ? <FiX /> : <FiMenu />}
@@ -115,6 +132,9 @@ const Navbar = () => {
             {item.label}
           </NavLink>
         ))}
+        <ResumeNavButton href="/resume.pdf" download="Farouk_Afolabi_Resume.pdf" onClick={() => setIsOpen(false)}>
+          Resume
+        </ResumeNavButton>
       </MobileMenu>
     </Nav>
   );

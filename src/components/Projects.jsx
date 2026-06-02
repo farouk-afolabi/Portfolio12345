@@ -133,10 +133,18 @@ const Projects = () => {
     {
       title: "Job-Tracker App",
       description: 'A full-stack job application tracker built as a portfolio project. Search real job listings across multiple sources, score how well each role matches your background using AI, and manage every application through your personal pipeline — from first look to offer or rejection.',
-      technologies: ['React 19, React Router v7, Material UI v7, Recharts, React Context API, Node.js, Express 5, MongoDB Atlas, Mongoose, JWT (jsonwebtoken), bcryptjs, Anthropic Claude API, Adzuna Jobs API (US + CA), Jooble API, node-cron, Nodemailer (Gmail SMTP),express-rate-limit, environment-based CORS, GitHub Pages (frontend), Render (backend)'],
-      github: 'https://farouk-afolabi.github.io/Job-Tracker',
-      live: 'https://farouk-afolabi.github.io/Job-Tracker', 
+      technologies: ['React 19', 'React Router v7', 'Material UI v7', 'Recharts', 'React Context API', 'Node.js', 'Express 5', 'MongoDB Atlas', 'Mongoose', 'JWT', 'bcryptjs', 'Claude API', 'Adzuna API', 'Jooble API', 'node-cron', 'Nodemailer', 'GitHub Pages', 'Render'],
+      github: 'https://github.com/farouk-afolabi/Job-Tracker',
+      live: 'https://farouk-afolabi.github.io/Job-Tracker',
       image: '/images/Job Tracker.png' 
+    },
+    {
+      title: 'Sociable',
+      description: 'Sociable is a full-stack social media web application which was designed to provide users with a seamless and modern social media experience. The app allows registered users to create posts, comment, like, follow others, and engage in real-time private messaging.',
+      technologies: ['React', 'Firebase (Auth + Firestore)','React Router', 'Material UI','GitHub Actions', 'GitHub Pages'],
+      github: 'https://github.com/farouk-afolabi/Sociable',
+      live: 'https://farouk-afolabi.github.io/Sociable/',
+      image: '/images/Sociable.PNG'
     },
 
     {
@@ -146,14 +154,6 @@ const Projects = () => {
       github: 'https://github.com/farouk-afolabi/sports-store',
       live: 'https://farouk-afolabi.github.io/sports-store/', 
       image: '/images/Farouks Sport store.png' 
-    },    
-    {
-      title: 'TrainLinkIT',
-      description: 'TrainLinkIT is a full-stack web application designed to connect users with tech training programs, job boards, and real-time messaging. Built with React and Firebase, it includes authentication, dynamic routing, and private user areas.',
-      technologies: ['React', 'Firebase', 'React Router', 'GitHub Actions', 'GitHub Pages'],
-      github: 'https://github.com/farouk-afolabi/TrainLinkIT',
-      live: 'https://farouk-afolabi.github.io/TrainLinkIT',
-      image: '/images/TrainLinkIT.PNG' 
     },
     {
       title: 'Todo App with React & Firebase',
@@ -162,15 +162,16 @@ const Projects = () => {
       github: 'https://github.com/farouk-afolabi/TodoApp',
       live: 'https://farouk-afolabi.github.io/TodoApp/',
       image: '/images/TodoApp.png'
-    },
+    }
+    ,    
     {
-      title: 'Sociable',
-      description: ' Sociable is a full-stack social media web application which was designed to provide users with a seamless and modern social media experience. The app allows registered users to create posts, comment, like, follow others, and engage in real-time private messaging.',
-      technologies: ['React', 'Firebase (Auth + Firestore)','React Router', 'Material UI','GitHub Actions', 'GitHub Pages'],
-      github: 'https://github.com/farouk-afolabi/Sociable',
-      live: 'https://farouk-afolabi.github.io/Sociable/',
-      image: '/images/Sociable.PNG'
-    },
+      title: 'TrainLinkIT',
+      description: 'TrainLinkIT is a full-stack web application designed to connect users with tech training programs, job boards, and real-time messaging. Built with React and Firebase, it includes authentication, dynamic routing, and private user areas.',
+      technologies: ['React', 'Firebase', 'React Router', 'GitHub Actions', 'GitHub Pages'],
+      github: 'https://github.com/farouk-afolabi/TrainLinkIT',
+      live: 'https://farouk-afolabi.github.io/TrainLinkIT',
+      image: '/images/TrainLinkIT.PNG' 
+    }
     
   ];
 
