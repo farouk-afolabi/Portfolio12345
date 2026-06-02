@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npm run *)",
       "Bash(node -e \"require\\('puppeteer'\\)\")",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(curl *)",
+      "Bash(npm install *)"
     ]
   }
 }

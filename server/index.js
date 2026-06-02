@@ -1,8 +1,8 @@
 require("dotenv").config();
 const OpenAI = require("openai");
+const { Resend } = require("resend");
 const express = require("express");
 const cors = require("cors");
-const nodemailer = require("nodemailer");
 const rateLimit = require("express-rate-limit");
 
 const app = express();
@@ -33,6 +33,7 @@ app.get("/", (req, res) => {
 });
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const SYSTEM_PROMPT = `You are Farouk Afolabi's personal AI assistant, embedded in his developer portfolio at faroukafolabi.com. Your job is to help recruiters, hiring managers, and visitors learn about Farouk accurately and confidently.
 
@@ -194,37 +195,32 @@ app.post("/api/chat", async (req, res) => {
 });
 
 app.post("/api/contact", async (req, res) => {
-  console.log("Contact request received", req.body);
+  const { name, email, subject, message } = req.body;
+
+  const missingFields = ["name", "email", "message"].filter((f) => !req.body[f]);
+  if (missingFields.length > 0) {
+    return res.status(400).json({ success: false, message: `Missing required fields: ${missingFields.join(", ")}` });
+  }
 
   try {
-    const requiredFields = ["name", "email", "message"];
-    const missingFields = requiredFields.filter((field) => !req.body[field]);
+    const { error } = await resend.emails.send({
+      from: "Portfolio Contact <onboarding@resend.dev>",
+      to: "afolabifarouk99@gmail.com",
+      reply_to: email,
+      subject: subject ? `[Portfolio] ${subject}` : `[Portfolio] New message from ${name}`,
+      html: formatHtmlEmail({ name, email, subject, message }),
+      text: formatPlainText({ name, email, subject, message }),
+    });
 
-    if (missingFields.length > 0) {
-      return res.status(400).json({
-        success: false,
-        message: `Missing required fields: ${missingFields.join(", ")}`,
-      });
+    if (error) {
+      console.error("Resend error:", error);
+      return res.status(500).json({ success: false, message: "Failed to send message. Please try again." });
     }
-
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
-    });
-
-    await transporter.sendMail({
-      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER,
-      replyTo: req.body.email,
-      subject: req.body.subject || "New message from portfolio",
-      text: formatPlainText(req.body),
-      html: formatHtmlEmail(req.body),
-    });
 
     res.json({ success: true, message: "Message sent successfully!" });
   } catch (error) {
-    console.error("Email error:", error);
-    res.status(500).json({ success: false, message: error.message || "Failed to send message" });
+    console.error("Contact error:", error);
+    res.status(500).json({ success: false, message: "Failed to send message. Please try again." });
   }
 });
 
@@ -264,5 +260,4 @@ function formatHtmlEmail(data) {
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, "0.0.0.0", () => {
   console.log("Server running on port " + PORT);
-  console.log("Email user: " + process.env.EMAIL_USER);
 });

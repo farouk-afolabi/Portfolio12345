@@ -101,33 +101,46 @@ const Label = styled.label`
 
 const Input = styled.input`
   padding: ${theme.spacing.sm};
-  border: 1px solid ${theme.colors.border};
-  border-radius: 4px;
+  border: 1.5px solid ${theme.colors.border};
+  border-radius: 6px;
   font-size: ${theme.fontSizes.base};
+  color: ${theme.colors.text};
+  background: #ffffff;
   transition: ${theme.transitions.default};
-  background: ${theme.colors.inputBackground};
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+
+  &::placeholder {
+    color: #94a3b8;
+  }
 
   &:focus {
     outline: none;
     border-color: ${theme.colors.primary};
-    box-shadow: 0 0 0 2px ${theme.colors.primary}20;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
   }
 `;
 
 const TextArea = styled.textarea`
   padding: ${theme.spacing.sm};
-  border: 1px solid ${theme.colors.border};
-  border-radius: 4px;
+  border: 1.5px solid ${theme.colors.border};
+  border-radius: 6px;
   font-size: ${theme.fontSizes.base};
+  color: ${theme.colors.text};
+  background: #ffffff;
   min-height: 150px;
   resize: vertical;
   transition: ${theme.transitions.default};
-  background: ${theme.colors.inputBackground};
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  font-family: inherit;
+
+  &::placeholder {
+    color: #94a3b8;
+  }
 
   &:focus {
     outline: none;
     border-color: ${theme.colors.primary};
-    box-shadow: 0 0 0 2px ${theme.colors.primary}20;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
   }
 `;
 
@@ -221,38 +234,38 @@ const Contact = () => {
       return;
     }
 
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 12000);
+
     try {
       const response = await fetch('https://portfolio12345-backend.onrender.com/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeout);
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || `Server responded with ${response.status}`);
+        throw new Error(errorData.message || `Server error (${response.status})`);
       }
 
       const result = await response.json();
-      
-      // Reset form before showing success
       form.reset();
-      
-      setStatus({
-        submitting: false,
-        success: true,
-        message: result.message || 'Message sent successfully!'
-      });
+      setStatus({ submitting: false, success: true, error: false, message: result.message || 'Message sent successfully!' });
 
     } catch (error) {
+      clearTimeout(timeout);
       console.error('Submission error:', error);
       setStatus({
         submitting: false,
         success: false,
         error: true,
         message: error.name === 'AbortError'
-          ? 'Request timed out. Please try again.'
-          : error.message || 'Network error. Please check your connection.'
+          ? 'Request timed out — please try again or email me directly at afolabifarouk99@gmail.com'
+          : error.message || 'Something went wrong. Please email me directly at afolabifarouk99@gmail.com',
       });
     }
   };
@@ -293,9 +306,9 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <ContactItem href="mailto:farouk.afolabi@yahoo.com">
+            <ContactItem href="mailto:afolabifarouk99@gmail.com">
               <FiMail size={20} />
-              <span>farouk.afolabi@yahoo.com</span>
+              <span>afolabifarouk99@gmail.com</span>
             </ContactItem>
             <ContactItem href="tel:+16478627461">
               <FiPhone size={20} />
