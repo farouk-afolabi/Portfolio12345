@@ -280,8 +280,8 @@ const Hero = () => {
             >
               <FiLinkedin />
             </SocialLink>
-            <SocialLink 
-              href="mailto:farouk.afolabi@yahoo.com"
+            <SocialLink
+              href="mailto:afolabifarouk99@gmail.com"
               whileHover={{ scale: 1.1 }}
             >
               <FiMail />
