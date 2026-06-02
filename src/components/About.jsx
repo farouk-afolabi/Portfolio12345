@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
-import { FiAward, FiBook, FiUsers, FiGlobe } from 'react-icons/fi';
+import { FiAward, FiBook, FiUsers, FiCpu } from 'react-icons/fi';
 import { theme } from '../styles/theme';
 
 
@@ -192,7 +192,7 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              Fluent in English with a <HighlightText>CELPIP Band 9</HighlightText> certification, I excel at communicating technical concepts to diverse audiences - a skill honed through both my academic journey and community work.
+              I build <HighlightText>production-grade applications</HighlightText> — from AI-powered job trackers that integrate live job feeds and Claude API scoring, to real-time social platforms backed by Firebase. Every project is deployed, live, and built to solve a real problem.
             </motion.p>
           </AboutText>
           
@@ -255,12 +255,12 @@ const About = () => {
               transition={{ duration: 0.5, delay: 0.5 }}
             >
               <AchievementIcon>
-                <FiGlobe />
+                <FiCpu />
               </AchievementIcon>
               <AchievementContent>
-                <AchievementTitle>Language Proficiency</AchievementTitle>
+                <AchievementTitle>AI-Integrated Applications</AchievementTitle>
                 <AchievementDescription>
-                  Certified CELPIP Band 9 (Canadian English Language Proficiency Index Program) holder, demonstrating advanced English communication skills.
+                  Built production apps integrating the Anthropic Claude API — including an AI job scorer that ranks live listings against a user's background and an embedded portfolio chatbot.
                 </AchievementDescription>
               </AchievementContent>
             </AchievementItem>

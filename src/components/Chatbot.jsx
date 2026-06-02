@@ -1,9 +1,144 @@
 import React, { useState, useRef, useEffect } from 'react';
+import styled from '@emotion/styled';
+import { theme } from '../styles/theme';
+
+const ToggleButton = styled.button`
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  background: ${theme.colors.primary};
+  color: #fff;
+  border: none;
+  font-size: 26px;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: ${theme.transitions.default};
+
+  &:hover {
+    background: ${theme.colors.secondary};
+    transform: scale(1.08);
+  }
+`;
+
+const ChatWindow = styled.div`
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  width: 320px;
+  max-height: 480px;
+  background: ${theme.colors.backgroundDark};
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  z-index: 1001;
+  overflow: hidden;
+`;
+
+const ChatHeader = styled.div`
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-weight: 600;
+  font-size: ${theme.fontSizes.base};
+  color: ${theme.colors.primary};
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    flex-shrink: 0;
+  }
+`;
+
+const MessagesArea = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+`;
+
+const MessageRow = styled.div`
+  display: flex;
+  justify-content: ${({ isUser }) => isUser ? 'flex-end' : 'flex-start'};
+`;
+
+const Bubble = styled.span`
+  display: inline-block;
+  background: ${({ isUser }) => isUser ? theme.colors.primary : 'rgba(255,255,255,0.07)'};
+  color: ${({ isUser }) => isUser ? '#fff' : theme.colors.textDark};
+  border-radius: ${({ isUser }) => isUser ? '16px 16px 4px 16px' : '16px 16px 16px 4px'};
+  padding: 9px 13px;
+  max-width: 82%;
+  font-size: ${theme.fontSizes.sm};
+  line-height: 1.5;
+  word-break: break-word;
+  white-space: pre-wrap;
+  border: ${({ isUser }) => isUser ? 'none' : '1px solid rgba(255,255,255,0.08)'};
+`;
+
+const InputRow = styled.form`
+  display: flex;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  gap: 8px;
+`;
+
+const ChatInput = styled.input`
+  flex: 1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: ${theme.colors.textDark};
+  outline: none;
+  font-size: ${theme.fontSizes.sm};
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: ${theme.transitions.default};
+
+  &::placeholder { color: rgba(255,255,255,0.3); }
+  &:focus { border-color: ${theme.colors.primary}; }
+`;
+
+const SendButton = styled.button`
+  background: ${theme.colors.primary};
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: 600;
+  font-size: ${theme.fontSizes.sm};
+  cursor: pointer;
+  transition: ${theme.transitions.default};
+  flex-shrink: 0;
+
+  &:hover { background: ${theme.colors.secondary}; }
+`;
 
 const Chatbot = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { sender: 'bot', text: 'Hi! I am Farouk’s AI assistant. Ask me anything about Farouk!' }
+    { sender: 'bot', text: "Hi! I'm Farouk's AI assistant. Ask me anything about Farouk!" }
   ]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
@@ -16,11 +151,9 @@ const Chatbot = () => {
 
   const handleSend = async (e) => {
     e.preventDefault();
-
     if (!input.trim()) return;
 
     const userMessage = input;
-
     setMessages(prev => [...prev, { sender: 'user', text: userMessage }]);
     setInput('');
 
@@ -36,7 +169,7 @@ const Chatbot = () => {
       const data = await response.json();
 
       setMessages(prev => [
-        ...prev.slice(0, -1), // Remove "Thinking..."
+        ...prev.slice(0, -1),
         { sender: 'bot', text: data.response || 'Something went wrong' },
       ]);
     } catch (err) {
@@ -50,101 +183,30 @@ const Chatbot = () => {
 
   return (
     <>
-      <button
-        onClick={() => setOpen(o => !o)}
-        style={{
-          position: 'fixed',
-          bottom: 24,
-          right: 24,
-          zIndex: 1000,
-          borderRadius: '50%',
-          width: 56,
-          height: 56,
-          background: '#2563eb',
-          color: '#fff',
-          border: 'none',
-          fontSize: 28,
-          boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-          cursor: 'pointer',
-        }}
-        aria-label="Open chatbot"
-      >
+      <ToggleButton onClick={() => setOpen(o => !o)} aria-label="Open chatbot">
         💬
-      </button>
+      </ToggleButton>
       {open && (
-        <div
-          style={{
-            position: 'fixed',
-            bottom: 90,
-            right: 24,
-            width: 320,
-            maxHeight: 480,
-            background: '#fff',
-            borderRadius: 12,
-            boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
-            display: 'flex',
-            flexDirection: 'column',
-            zIndex: 1001,
-          }}
-        >
-          <div style={{ padding: 16, borderBottom: '1px solid #eee', fontWeight: 600, color: '#2563eb' }}>
-            Farouk’s AI Chatbot
-          </div>
-          <div style={{ flex: 1, overflowY: 'auto', padding: 16, background: '#f8fafc' }}>
+        <ChatWindow>
+          <ChatHeader>Farouk's AI Assistant</ChatHeader>
+          <MessagesArea>
             {messages.map((msg, i) => (
-              <div
-                key={i}
-                style={{
-                  marginBottom: 12,
-                  textAlign: msg.sender === 'user' ? 'right' : 'left',
-                }}
-              >
-                <span
-                  style={{
-                    display: 'inline-block',
-                    background: msg.sender === 'user' ? '#2563eb' : '#e0e7ef',
-                    color: msg.sender === 'user' ? '#fff' : '#222',
-                    borderRadius: 16,
-                    padding: '8px 14px',
-                    maxWidth: '80%',
-                    wordBreak: 'break-word',
-                    whiteSpace: 'pre-wrap', // to preserve whitespace and line breaks if any
-                  }}
-                >
-                  {msg.text}
-                </span>
-              </div>
+              <MessageRow key={i} isUser={msg.sender === 'user'}>
+                <Bubble isUser={msg.sender === 'user'}>{msg.text}</Bubble>
+              </MessageRow>
             ))}
             <div ref={messagesEndRef} />
-          </div>
-          <form
-            onSubmit={handleSend}
-            style={{ display: 'flex', borderTop: '1px solid #eee', padding: 8, background: '#fff' }}
-          >
-            <input
+          </MessagesArea>
+          <InputRow onSubmit={handleSend}>
+            <ChatInput
               type="text"
               value={input}
               onChange={e => setInput(e.target.value)}
               placeholder="Ask me about Farouk..."
-              style={{ flex: 1, border: 'none', outline: 'none', fontSize: 16, padding: 8, borderRadius: 8 }}
             />
-            <button
-              type="submit"
-              style={{
-                marginLeft: 8,
-                background: '#2563eb',
-                color: '#fff',
-                border: 'none',
-                borderRadius: 8,
-                padding: '8px 16px',
-                fontWeight: 600,
-                cursor: 'pointer',
-              }}
-            >
-              Send
-            </button>
-          </form>
-        </div>
+            <SendButton type="submit">Send</SendButton>
+          </InputRow>
+        </ChatWindow>
       )}
     </>
   );

@@ -99,9 +99,10 @@ const CategoryTitle = styled(motion.h3)`
 const Skills = () => {
   const skills = {
     'Frontend': ['React.js', 'Angular', 'TypeScript', 'JavaScript (ES6+)', 'HTML5 & CSS3', 'React Native (Expo)'],
-    'Backend': ['Node.js', 'Express', 'REST APIs', 'SQL', 'Firebase', 'PHP'],
-    'DevOps': ['Docker', 'CI/CD Pipelines', 'Full-Stack Deployment'],
-    'Tools': ['Git & GitHub', 'WordPress', 'VS Code', 'Postman']
+    'Backend': ['Node.js', 'Express', 'REST APIs', 'JWT Auth', 'Firebase', 'PHP'],
+    'Databases': ['MongoDB Atlas', 'Mongoose', 'Firebase Firestore', 'SQL'],
+    'DevOps': ['Docker', 'GitHub Actions', 'Render', 'GitHub Pages', 'Vercel'],
+    'Tools': ['Git & GitHub', 'Postman', 'WordPress']
   };
 
   return (
