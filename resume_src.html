@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farouk Afolabi — Resume</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @page {
+      size: Letter;
+      margin: 0.55in 0.6in 0.55in 0.6in;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.45;
+      color: #1e293b;
+      background: #fff;
+    }
+
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── HEADER ── */
+    .header {
+      text-align: center;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2563eb;
+      margin-bottom: 11px;
+    }
+    .header h1 {
+      font-size: 22pt;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: #0f172a;
+    }
+    .header .title {
+      font-size: 11pt;
+      color: #2563eb;
+      font-weight: 600;
+      margin: 2px 0 6px;
+    }
+    .contact-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 4px 16px;
+      font-size: 8.5pt;
+      color: #475569;
+    }
+    .contact-row span::before { content: ''; }
+    .sep { color: #94a3b8; }
+
+    /* ── SECTION ── */
+    .section { margin-bottom: 11px; }
+    .section-title {
+      font-size: 9.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #2563eb;
+      border-bottom: 1px solid #bfdbfe;
+      padding-bottom: 2px;
+      margin-bottom: 7px;
+    }
+
+    /* ── SUMMARY ── */
+    .summary { font-size: 9.5pt; color: #334155; line-height: 1.5; }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 85px 1fr;
+      row-gap: 4px;
+      font-size: 9pt;
+    }
+    .skill-label { font-weight: 600; color: #1e293b; }
+    .skill-value { color: #334155; }
+
+    /* ── PROJECT ── */
+    .project { margin-bottom: 9px; }
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+    .project-title { font-weight: 700; font-size: 9.5pt; color: #0f172a; }
+    .project-links { font-size: 8pt; color: #2563eb; white-space: nowrap; }
+    .project-links a { color: #2563eb; }
+    .project-links .sep { color: #94a3b8; }
+    .project-stack {
+      font-size: 8pt;
+      color: #64748b;
+      margin-bottom: 3px;
+    }
+    .project ul {
+      padding-left: 14px;
+      list-style-type: disc;
+    }
+    .project ul li {
+      font-size: 9pt;
+      color: #334155;
+      margin-bottom: 2px;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-item { margin-bottom: 7px; }
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .edu-degree { font-weight: 700; font-size: 9.5pt; color: #0f172a; }
+    .edu-dates { font-size: 8.5pt; color: #64748b; white-space: nowrap; }
+    .edu-school { font-size: 9pt; color: #475569; }
+    .edu-note { font-size: 8.5pt; color: #64748b; margin-top: 1px; }
+    .badge {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-size: 7.5pt;
+      font-weight: 600;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Farouk Afolabi</h1>
+    <div class="title">Full-Stack Developer</div>
+    <div class="contact-row">
+      <span>+1 (647) 862-7461</span>
+      <span class="sep">|</span>
+      <span><a href="mailto:afolabifarouk99@gmail.com">afolabifarouk99@gmail.com</a></span>
+      <span class="sep">|</span>
+      <span>London, ON, Canada</span>
+      <span class="sep">|</span>
+      <span><a href="https://www.linkedin.com/in/farouk-afolabi/">linkedin.com/in/farouk-afolabi</a></span>
+      <span class="sep">|</span>
+      <span><a href="https://github.com/farouk-afolabi">github.com/farouk-afolabi</a></span>
+      <span class="sep">|</span>
+      <span><a href="https://faroukafolabi.com">faroukafolabi.com</a></span>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section">
+    <div class="section-title">Summary</div>
+    <p class="summary">
+      Full-Stack Developer and 2025 Fanshawe College graduate (GPA 3.85 &middot; Dean's Honor Roll) with a WES-certified Master's in Engineering Management.
+      Builds and deploys production-grade React and Node.js applications — including an AI-powered job tracker that integrates the Claude API, live job listing feeds, and automated email digests.
+      Brings a strong engineering background (problem decomposition, system thinking) to every layer of the stack.
+    </p>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-grid">
+      <span class="skill-label">Frontend</span>
+      <span class="skill-value">React 19, React Router v7, Angular 9, Material UI, Bootstrap, Framer Motion, JavaScript (ES6+), TypeScript, HTML5, CSS3, Sass/SCSS</span>
+
+      <span class="skill-label">Backend</span>
+      <span class="skill-value">Node.js, Express.js, REST API Design, JWT Authentication, bcryptjs, node-cron, Nodemailer (Gmail SMTP)</span>
+
+      <span class="skill-label">Databases</span>
+      <span class="skill-value">MongoDB Atlas, Mongoose, Firebase Firestore, Firebase Realtime Database</span>
+
+      <span class="skill-label">DevOps &amp; Tools</span>
+      <span class="skill-value">Git, GitHub Actions, Docker, Render, GitHub Pages, Vite, Google Analytics</span>
+
+      <span class="skill-label">APIs</span>
+      <span class="skill-value">Anthropic Claude API, Adzuna Jobs API, Jooble API, Firebase Auth</span>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section">
+    <div class="section-title">Projects</div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-title">Job-Tracker App</span>
+        <span class="project-links">
+          <a href="https://github.com/farouk-afolabi/Job-Tracker">GitHub</a>
+          <span class="sep"> | </span>
+          <a href="https://farouk-afolabi.github.io/Job-Tracker">Live Demo</a>
+        </span>
+      </div>
+      <div class="project-stack">React 19 · React Router v7 · Material UI · Node.js · Express 5 · MongoDB Atlas · JWT · Claude API · Adzuna API · Jooble API · Render · GitHub Pages</div>
+      <ul>
+        <li>Aggregates real-time job listings from Adzuna and Jooble (US &amp; Canada) and uses the Anthropic Claude API to score each role against the user's background, enabling AI-driven application prioritization.</li>
+        <li>Built full authentication flow with JWT and bcryptjs, implemented express-rate-limit and environment-based CORS, and automated daily email digests with node-cron and Nodemailer.</li>
+        <li>Deployed a decoupled architecture: React SPA on GitHub Pages, Node/Express REST API on Render with MongoDB Atlas persistence.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-title">Sociable — Social Media Platform</span>
+        <span class="project-links">
+          <a href="https://github.com/farouk-afolabi/Sociable">GitHub</a>
+          <span class="sep"> | </span>
+          <a href="https://farouk-afolabi.github.io/Sociable/">Live Demo</a>
+        </span>
+      </div>
+      <div class="project-stack">React · Firebase (Auth + Firestore) · Material UI · React Router · GitHub Actions · GitHub Pages</div>
+      <ul>
+        <li>Designed and built a full-stack social platform with real-time posts, comments, likes, follow/unfollow, and private messaging using Firebase Firestore subscriptions.</li>
+        <li>Automated CI/CD pipeline via GitHub Actions for zero-downtime deployments to GitHub Pages on every merge to main.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <span class="project-title">Farouk's Sports Store — E-Commerce App</span>
+        <span class="project-links">
+          <a href="https://github.com/farouk-afolabi/sports-store">GitHub</a>
+          <span class="sep"> | </span>
+          <a href="https://farouk-afolabi.github.io/sports-store/">Live Demo</a>
+        </span>
+      </div>
+      <div class="project-stack">Angular 9 · Bootstrap · Node.js · Express · JSON Server · JWT · Docker · GitHub Actions · GitHub Pages</div>
+      <ul>
+        <li>Built a full-stack e-commerce application with a responsive Angular frontend, JWT-secured REST API backend, and mock product database via JSON Server.</li>
+        <li>Containerized the full stack with Docker and configured GitHub Actions for automated CI/CD deployment.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">Education</div>
+
+    <div class="edu-item">
+      <div class="edu-header">
+        <span class="edu-degree">Web Development and Internet Applications — 2-Year Diploma <span class="badge">GPA 3.85 · Dean's Honor Roll</span></span>
+        <span class="edu-dates">2023 – 2025</span>
+      </div>
+      <div class="edu-school">Fanshawe College &middot; London, ON, Canada</div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-header">
+        <span class="edu-degree">M.Eng. Engineering Management / Industrial Engineering</span>
+        <span class="edu-dates">2020 – 2023</span>
+      </div>
+      <div class="edu-school">Istanbul Kultur University</div>
+      <div class="edu-note">WES Certified Canadian Equivalency &middot; Reference #6816699</div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-header">
+        <span class="edu-degree">B.Sc. Civil Engineering</span>
+        <span class="edu-dates">2013 – 2018</span>
+      </div>
+      <div class="edu-school">Afe Babalola University &middot; Nigeria</div>
+    </div>
+
+  </div>
+
+</body>
+</html>
