@@ -1,29 +1,42 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
+import { FiX, FiSend, FiCpu } from 'react-icons/fi';
 import { theme } from '../styles/theme';
+
+const pulse = keyframes`
+  0%, 100% { box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4), 0 0 0 0 rgba(37, 99, 235, 0.4); }
+  50% { box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4), 0 0 0 10px rgba(37, 99, 235, 0); }
+`;
 
 const ToggleButton = styled.button`
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 28px;
+  right: 28px;
   z-index: 1000;
-  border-radius: 50%;
-  width: 56px;
-  height: 56px;
+  border-radius: 50px;
+  height: 52px;
+  padding: 0 20px;
   background: ${theme.colors.primary};
   color: #fff;
   border: none;
-  font-size: 26px;
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+  font-size: ${theme.fontSizes.sm};
+  font-weight: 700;
+  letter-spacing: 0.02em;
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-  transition: ${theme.transitions.default};
+  gap: 8px;
+  animation: ${pulse} 2.5s ease-in-out infinite;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  svg { font-size: 18px; flex-shrink: 0; }
 
   &:hover {
     background: ${theme.colors.secondary};
-    transform: scale(1.08);
+    transform: scale(1.05);
+    animation: none;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
   }
 `;
 
@@ -168,15 +181,19 @@ const Chatbot = () => {
 
       const data = await response.json();
 
+      if (!response.ok) {
+        throw new Error(data.message || `Server error ${response.status}`);
+      }
+
       setMessages(prev => [
         ...prev.slice(0, -1),
-        { sender: 'bot', text: data.response || 'Something went wrong' },
+        { sender: 'bot', text: data.response || 'Something went wrong.' },
       ]);
     } catch (err) {
       console.error(err);
       setMessages(prev => [
         ...prev.slice(0, -1),
-        { sender: 'bot', text: 'Error communicating with server.' },
+        { sender: 'bot', text: "Sorry, I'm having trouble connecting right now. Try again in a moment!" },
       ]);
     }
   };
@@ -184,7 +201,7 @@ const Chatbot = () => {
   return (
     <>
       <ToggleButton onClick={() => setOpen(o => !o)} aria-label="Open chatbot">
-        💬
+        {open ? <FiX /> : <><FiCpu /> Ask AI about me</>}
       </ToggleButton>
       {open && (
         <ChatWindow>
@@ -204,7 +221,7 @@ const Chatbot = () => {
               onChange={e => setInput(e.target.value)}
               placeholder="Ask me about Farouk..."
             />
-            <SendButton type="submit">Send</SendButton>
+            <SendButton type="submit" aria-label="Send"><FiSend /></SendButton>
           </InputRow>
         </ChatWindow>
       )}
