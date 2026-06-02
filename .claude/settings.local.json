@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(npm run *)",
-      "Bash(node -e \"require\\('puppeteer'\\)\")"
+      "Bash(node -e \"require\\('puppeteer'\\)\")",
+      "Bash(node *)"
     ]
   }
 }
